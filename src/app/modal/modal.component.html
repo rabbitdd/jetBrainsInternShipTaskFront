@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h4 class="modal-title">Select color!</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Some colors</p>
+    <div class="color-btn">
+        <button pButton pRipple type="button" icon="pi" class="p-button-rounded" style="background-color: deepskyblue;" (click)="changeItemColor('deepskyblue')"></button>
+        <button pButton pRipple type="button" icon="pi" class="p-button-rounded" style="background-color: green;" (click)="changeItemColor('green')"></button>
+        <button pButton pRipple type="button" icon="pi" class="p-button-rounded" style="background-color: rebeccapurple;" (click)="changeItemColor('rebeccapurple')"></button>
+        <button pButton pRipple type="button" icon="pi " class="p-button-rounded" style="background-color: red;" (click)="changeItemColor('red')"></button>
+        <button pButton pRipple type="button" icon="pi " class="p-button-rounded" style="background-color: yellow;" (click)="changeItemColor('yellow')"></button>
+    </div>
+    
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>

@@ -1,0 +1,12 @@
+<div id="formContent">
+    <!-- Tabs Titles -->
+    <!-- Login Form -->
+    <form method="post">
+      <!-- <input #email type="text" id="email" class="fadeIn first" name="email" placeholder="email"> -->
+      <input #login type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+      <input #password type="password" id="password" class="fadeIn third" name="login" placeholder="password">
+      <input type="button" class="fadeIn fourth" value="Sign Up" (click)="submit(login.value, password.value)">
+      <!--<p-button label="Log in" class="fadeIn fourth button" (onClick)="submit(login.value, password.value)"></p-button>-->
+    </form>
+
+  </div>
