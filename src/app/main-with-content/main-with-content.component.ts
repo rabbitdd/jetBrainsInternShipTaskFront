@@ -20,7 +20,7 @@ export class MainWithContentComponent implements OnInit {
   todo: any[] = [];
 
   ngOnInit(): void {
-    const url = 'http://localhost:8080/mainContent';
+    const url = 'http://localhost:8080/task';
     const login = localStorage.getItem('login');
     const password = localStorage.getItem('password');
     if (login != null && password != null) {
@@ -37,7 +37,6 @@ export class MainWithContentComponent implements OnInit {
       params: new HttpParams().set('owner', this.name),
     }).subscribe(
       (data: any) => {
-        console.log(data);
         data.forEach((value: Task) => {
           this.todo.push(value);
         });
@@ -58,13 +57,10 @@ export class MainWithContentComponent implements OnInit {
   }
 
   addAnItemToList(data: string): void {
-
-    const url = 'http://localhost:8080/mainContent';
+    const url = 'http://localhost:8080/task';
     const task: Task = new Task();
     task.name = data;
     task.owner = this.name;
-    console.log('yes');
-    console.log(task);
     // tslint:disable-next-line:max-line-length
     const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(localStorage.getItem('login') + ':' + localStorage.getItem('password'))});
     this.http.post<Task>(url, task, {
@@ -80,7 +76,7 @@ export class MainWithContentComponent implements OnInit {
 
   deleteItemFromList(item: any): void {
     console.log(item);
-    const url = 'http://localhost:8080/mainContent';
+    const url = 'http://localhost:8080/task';
     // tslint:disable-next-line:max-line-length
     const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(localStorage.getItem('login') + ':' + localStorage.getItem('password'))});
     this.http.get(url, {
@@ -97,19 +93,14 @@ export class MainWithContentComponent implements OnInit {
       }, error => {
         console.log(error.status);
       });
-
-
-    console.log(item);
     const index = this.todo.indexOf(item, 0);
     if (index > -1) {
       this.todo.splice(index, 1);
     }
-    console.log(this.todo);
-    console.log('delete');
   }
 
   changeItemColor(item: any): void {
-    const url = 'http://localhost:8080/mainContent';
+    const url = 'http://localhost:8080/task';
     // tslint:disable-next-line:max-line-length
     const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(localStorage.getItem('login') + ':' + localStorage.getItem('password'))});
     const index = this.todo.indexOf(item, 0);
@@ -130,6 +121,6 @@ export class MainWithContentComponent implements OnInit {
   signOut(): void {
     localStorage.setItem('login', '');
     localStorage.setItem('password', '');
-    this.route.navigate(['/main']);
+    this.route.navigate(['/auth']);
   }
 }

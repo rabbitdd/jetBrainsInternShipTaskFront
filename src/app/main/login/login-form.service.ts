@@ -9,7 +9,7 @@ import { User } from '../User';
 
 @Injectable()
 export class SignInUser {
-    private url  = 'http://localhost:8080/signIn';
+    private url  = 'http://localhost:8080/user/login';
     constructor(private http: HttpClient, private route: Router){}
 
     signInUser(user: User, modal: NgbActiveModal): void {
@@ -25,7 +25,7 @@ export class SignInUser {
             console.log(data);
             localStorage.setItem('login', user.login);
             localStorage.setItem('password', user.password);
-            this.route.navigateByUrl('/mainContent');
+            this.route.navigateByUrl('/task');
             modal.close();
 
         }, error => {
