@@ -1,53 +1,37 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import { ModalDismissReasons, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { convertCompilerOptionsFromJson } from 'typescript';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SignUpUser } from './reg/reg-form.service';
 import { Router } from '@angular/router';
 import { User } from './User';
 import { SignInUser } from './login/login-form.service';
 import { ModalComponent } from '../modal/modal.component';
 
-// @Component({
-//   //selector: 'ngbd-modal-content',
-//   templateUrl: 'popUpColor.html',
-//   styleUrls: ['popUpColor.css']
-// })
-// export class NgbdModalContent {
-//   constructor(public activeModal: NgbActiveModal) {}
-// }
-
 @Component({
-  //selector: 'ngbd-modal-content',
   templateUrl: './login/login-form.html',
   styleUrls: ['./login/login-form.css']
 })
-export class NgbdFormLogContent {
-  constructor(public activeModal: NgbActiveModal, private SignIn: SignInUser, private route: Router) {}
-  submit(login: string, password: string) {
-    // console.log(login + " : " + password);
-    let user: User = {login, password};
+export class NgbdFormLogContentComponent {
+  constructor(public activeModal: NgbActiveModal, private SignIn: SignInUser) {}
+  submit(login: string, password: string): void {
+    const user: User = {login, password};
     console.log(user);
     this.SignIn.signInUser(user, this.activeModal);
   }
 }
 
 @Component({
-  //selector: 'ngbd-modal-content',
   templateUrl: './reg/reg-form.html',
   styleUrls: ['./reg/reg-form.css']
 })
-export class NgbdFormRegContent {
-  constructor(public activeModal: NgbActiveModal, private SignUp: SignUpUser, private route: Router) {}
-  submit(login: string, password: string) {
-    // console.log(login + " : " + password);
-    let user: User = {login, password};
+
+export class NgbdFormRegContentComponent {
+  constructor(public activeModal: NgbActiveModal, private SignUp: SignUpUser) {}
+  submit(login: string, password: string): void {
+    const user: User = {login, password};
     console.log(user);
     this.SignUp.signUpUser(user, this.activeModal);
   }
-  
 }
 
 
@@ -55,12 +39,10 @@ export class NgbdFormRegContent {
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
-  template: '<input type="text" name="item" placeholder="item">'
 })
 
-
 export class MainComponent implements OnInit {
-  todo:any[] = [
+  todo: any[] = [
     // 'Get to work',
     // 'Pick up groceries',
     // 'Go home',
@@ -71,7 +53,7 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  drop(event: CdkDragDrop<Input[]>) {
+  drop(event: CdkDragDrop<Input[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -82,12 +64,13 @@ export class MainComponent implements OnInit {
     }
   }
 
-  addAnItemToList(data: String) {
+  // tslint:disable-next-line:ban-types
+  addAnItemToList(data: String): void {
     console.log(this.todo);
     this.todo.push(data);
   }
 
-  deleteItemFromList(item: any) {
+  deleteItemFromList(item: any): void {
     console.log(item);
     const index = this.todo.indexOf(item, 0);
     if (index > -1) {
@@ -97,17 +80,15 @@ export class MainComponent implements OnInit {
     console.log('delete');
   }
 
-  changeItemColor() {
+  changeItemColor(): void {
     const modalRef = this.modalService.open(ModalComponent);
   }
 
-  loginForm() {
-    const modalRef = this.modalService.open(NgbdFormLogContent);
+  loginForm(): void {
+    const modalRef = this.modalService.open(NgbdFormLogContentComponent);
   }
 
-  regForm() {
-    const modalRef = this.modalService.open(NgbdFormRegContent);
+  regForm(): void {
+    const modalRef = this.modalService.open(NgbdFormRegContentComponent);
   }
-
-  
 }

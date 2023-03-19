@@ -1,6 +1,5 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { MainWithContentComponent } from '../main-with-content/main-with-content.component';
 
 @Component({
   selector: 'app-modal',
@@ -10,17 +9,13 @@ import { MainWithContentComponent } from '../main-with-content/main-with-content
 export class ModalComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal) { }
 
-  color: string = "white";
+  color = 'white';
   ngOnInit(): void {
   }
 
-  changeItemColor(color: string) {
+  changeItemColor(color: string): void {
     this.color = color;
     this.activeModal.close(color);
   }
 
 }
-function Input() {
-  throw new Error('Function not implemented.');
-}
-
