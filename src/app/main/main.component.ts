@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SignUpUser } from './reg/reg-form.service';
-import { Router } from '@angular/router';
 import { User } from './User';
 import { SignInUser } from './login/login-form.service';
 import { ModalComponent } from '../modal/modal.component';
@@ -15,7 +14,6 @@ export class NgbdFormLogContentComponent {
   constructor(public activeModal: NgbActiveModal, private SignIn: SignInUser) {}
   submit(login: string, password: string): void {
     const user: User = {login, password};
-    console.log(user);
     this.SignIn.signInUser(user, this.activeModal);
   }
 }
@@ -29,7 +27,6 @@ export class NgbdFormRegContentComponent {
   constructor(public activeModal: NgbActiveModal, private SignUp: SignUpUser) {}
   submit(login: string, password: string): void {
     const user: User = {login, password};
-    console.log(user);
     this.SignUp.signUpUser(user, this.activeModal);
   }
 }
