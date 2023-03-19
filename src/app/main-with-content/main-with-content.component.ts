@@ -1,6 +1,5 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { error } from '@angular/compiler/src/util';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,49 +14,39 @@ import { Task } from './task';
 })
 export class MainWithContentComponent implements OnInit {
   constructor(private modalService: NgbModal, private http: HttpClient, private route: Router) { }
-  name: string = "";
-  color: string = "white";
-  pas: string = "";
+  name = '';
+  color = 'white';
+  pas = '';
   todo: any[] = [];
-  // todo:any[] = [
-  //   // 'Get to work',
-  //   // 'Pick up groceries',
-  //   // 'Go home',
-  //   // 'Fall asleep'
-  // ];
 
   ngOnInit(): void {
-    let url: string = "http://localhost:8080/mainContent";
-    let login = localStorage.getItem('login');
-    let password = localStorage.getItem('password');
+    const url = 'http://localhost:8080/mainContent';
+    const login = localStorage.getItem('login');
+    const password = localStorage.getItem('password');
     if (login != null && password != null) {
       this.name = login;
       this.pas = password;
     }
     console.log(this.name);
-    let str: string = login + ":" + password;
+    const str: string = login + ':' + password;
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(unescape(encodeURIComponent(str))),
     });
     this.http.get(url, {
       headers,
       params: new HttpParams().set('owner', this.name),
-      //responseType: "text" as 'json'
     }).subscribe(
       (data: any) => {
         console.log(data);
         data.forEach((value: Task) => {
           this.todo.push(value);
-          // this.valueForLocalStorage = this.initLocalStorage(value);
-          // localStorage.setItem('points',this.valueForLocalStorage);
-          
         });
       }, error => {
         console.log(error.status);
       });
   }
 
-  drop(event: CdkDragDrop<Input[]>) {
+  drop(event: CdkDragDrop<Input[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -68,36 +57,39 @@ export class MainWithContentComponent implements OnInit {
     }
   }
 
-  addAnItemToList(data: string) {
+  addAnItemToList(data: string): void {
 
-    let url: string = "http://localhost:8080/mainContent";
-    let task: Task = new Task();
+    const url = 'http://localhost:8080/mainContent';
+    const task: Task = new Task();
     task.name = data;
     task.owner = this.name;
-    console.log("yes");
+    console.log('yes');
     console.log(task);
-    const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(localStorage.getItem('login') + ":" + localStorage.getItem('password'))});
+    // tslint:disable-next-line:max-line-length
+    const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(localStorage.getItem('login') + ':' + localStorage.getItem('password'))});
     this.http.post<Task>(url, task, {
-      headers: headers,
-      responseType: "text" as 'json'
+      headers,
+      responseType: 'text' as 'json'
     }).subscribe(
+      // tslint:disable-next-line:no-shadowed-variable
       (data: any) => {
         console.log(data);
         this.todo.push(task);
       });
   }
 
-  deleteItemFromList(item: any) {
+  deleteItemFromList(item: any): void {
     console.log(item);
-    let url: string = "http://localhost:8080/mainContent";
-    const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(localStorage.getItem('login') + ":" + localStorage.getItem('password'))});
+    const url = 'http://localhost:8080/mainContent';
+    // tslint:disable-next-line:max-line-length
+    const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(localStorage.getItem('login') + ':' + localStorage.getItem('password'))});
     this.http.get(url, {
       headers,
-      params: new HttpParams().set('delete', "1").set('owner', this.name).set('name', item.name),
-      //responseType: "text" as 'json'
+      params: new HttpParams().set('delete', '1').set('owner', this.name).set('name', item.name),
     }).subscribe(
       (data: any) => {
         console.log(data);
+        // tslint:disable-next-line:no-shadowed-variable
         const index = this.todo.indexOf(item, 0);
         if (index > -1) {
           this.todo.splice(index, 1);
@@ -116,17 +108,16 @@ export class MainWithContentComponent implements OnInit {
     console.log('delete');
   }
 
-  changeItemColor(item: any) {
-    let url: string = "http://localhost:8080/mainContent";
-    const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(localStorage.getItem('login') + ":" + localStorage.getItem('password'))});
-    
+  changeItemColor(item: any): void {
+    const url = 'http://localhost:8080/mainContent';
+    // tslint:disable-next-line:max-line-length
+    const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(localStorage.getItem('login') + ':' + localStorage.getItem('password'))});
     const index = this.todo.indexOf(item, 0);
     const modalRef = this.modalService.open(ModalComponent).result.then((result) => {
       item.color = result;
       this.http.get(url, {
         headers,
         params: new HttpParams().set('owner', this.name).set('name', item.name).set('color', result),
-        //responseType: "text" as 'json'
       }).subscribe(
         (data: any) => {
           console.log(data);
@@ -136,8 +127,8 @@ export class MainWithContentComponent implements OnInit {
     }
     );
   }
-  signOut() {
-    localStorage.setItem('login','');
+  signOut(): void {
+    localStorage.setItem('login', '');
     localStorage.setItem('password', '');
     this.route.navigate(['/main']);
   }
