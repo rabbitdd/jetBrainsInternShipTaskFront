@@ -4,9 +4,9 @@ import { MainWithContentComponent } from './main-with-content/main-with-content.
 import { MainComponent } from './main/main.component';
 
 const routes: Routes = [
-  {path: 'main', component: MainComponent},
-  {path: '', redirectTo: '/mainContent', pathMatch: 'full'},
-  {path: 'mainContent', component: MainWithContentComponent}
+  {path: 'auth', component: MainComponent},
+  {path: '', redirectTo: '/task', pathMatch: 'full'},
+  {path: 'task', component: MainWithContentComponent}
 ];
 
 @NgModule({

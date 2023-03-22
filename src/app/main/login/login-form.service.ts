@@ -25,7 +25,7 @@ export class SignInUser {
             console.log(data);
             localStorage.setItem('login', user.login);
             localStorage.setItem('password', user.password);
-            this.route.navigateByUrl('/mainContent');
+            this.route.navigateByUrl('/task');
             modal.close();
 
         }, error => {

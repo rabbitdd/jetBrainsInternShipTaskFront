@@ -73,8 +73,6 @@ export class MainComponent implements OnInit {
     if (index > -1) {
       this.todo.splice(index, 1);
     }
-    console.log(this.todo);
-    console.log('delete');
   }
 
   changeItemColor(): void {
