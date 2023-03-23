@@ -1,7 +1,8 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
   rel="stylesheet">
 <nav class="navbar navbar-light navbar-custom" style="background-color: deepskyblue">
-    <span class="navbar-brand mb-0 h1">
+  <div>
+  <span class="navbar-brand mb-0 h1">
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
 <g>
@@ -23,8 +24,9 @@
 	</g>
 </g>
         </svg>
-        Hello !
+    Todolist
     </span>
+  </div>
     <form class="form-inline">
         <!-- <button type="button" class="btn btn-primary btn-custom" style="background-color: black; color: white;" (click)="loginForm()">Sign In</button> -->
 		<!-- <button type="button" class="btn btn-primary btn-custom" style="background-color: black; color: white;" (click)="regForm()">Sign Up</button> -->
@@ -34,8 +36,7 @@
 </nav>
 <div class = "main-container">
 	<div class = "center">
-	<div class="example-container">
-		<h1>ToDo List</h1>
+	<div class="example-container" style="margin-top: 75px">
 		<div
 		  cdkDropList
 		  [cdkDropListData]="todo"
@@ -62,7 +63,7 @@
 		</div>
 		</form>
 	  </div>
-	  
+
 	</div>
 </div>
 <footer class="fixed-bottom">
