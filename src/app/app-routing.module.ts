@@ -5,7 +5,7 @@ import { MainComponent } from './main/main.component';
 
 const routes: Routes = [
   {path: 'auth', component: MainComponent},
-  {path: '', redirectTo: '/task', pathMatch: 'full'},
+  {path: '', redirectTo: '/auth', pathMatch: 'full'},
   {path: 'task', component: MainWithContentComponent}
 ];
 

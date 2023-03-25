@@ -39,12 +39,7 @@ export class NgbdFormRegContentComponent {
 })
 
 export class MainComponent implements OnInit {
-  todo: any[] = [
-    // 'Get to work',
-    // 'Pick up groceries',
-    // 'Go home',
-    // 'Fall asleep'
-  ];
+  todo: any[] = [];
   constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -60,15 +55,11 @@ export class MainComponent implements OnInit {
                         event.currentIndex);
     }
   }
-
-  // tslint:disable-next-line:ban-types
-  addAnItemToList(data: String): void {
-    console.log(this.todo);
+  addAnItemToList(data: any): void {
     this.todo.push(data);
   }
 
   deleteItemFromList(item: any): void {
-    console.log(item);
     const index = this.todo.indexOf(item, 0);
     if (index > -1) {
       this.todo.splice(index, 1);
@@ -76,14 +67,14 @@ export class MainComponent implements OnInit {
   }
 
   changeItemColor(): void {
-    const modalRef = this.modalService.open(ModalComponent);
+    this.modalService.open(ModalComponent);
   }
 
   loginForm(): void {
-    const modalRef = this.modalService.open(NgbdFormLogContentComponent);
+    this.modalService.open(NgbdFormLogContentComponent);
   }
 
   regForm(): void {
-    const modalRef = this.modalService.open(NgbdFormRegContentComponent);
+    this.modalService.open(NgbdFormRegContentComponent);
   }
 }

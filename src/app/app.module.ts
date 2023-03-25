@@ -5,7 +5,7 @@ import {ButtonModule} from 'primeng/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MainComponent } from './main/main.component';
+import {MainComponent, NgbdFormLogContentComponent, NgbdFormRegContentComponent} from './main/main.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {InputTextModule} from 'primeng/inputtext';
 import {MatButtonModule} from '@angular/material/button';
@@ -29,8 +29,9 @@ import { MainWithContentComponent } from './main-with-content/main-with-content.
     AppComponent,
     MainComponent,
     ModalComponent,
-    MainWithContentComponent
-
+    MainWithContentComponent,
+    NgbdFormLogContentComponent,
+    NgbdFormRegContentComponent
   ],
   imports: [
     BrowserModule,
